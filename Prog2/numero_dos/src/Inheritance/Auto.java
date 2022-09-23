@@ -1,5 +1,7 @@
 package Inheritance;
 
+import java.util.Objects;
+
 public class Auto {
     private String rendszam;
     private int teljesitmeny;
@@ -21,6 +23,19 @@ public class Auto {
                 ", teljesitmeny=" + teljesitmeny +
                 ", automata=" + automata +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Auto auto = (Auto) o;
+        return teljesitmeny == auto.teljesitmeny && automata == auto.automata && rendszam.equals(auto.rendszam);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rendszam, teljesitmeny, automata);
     }
 
     public String getRendszam() {
