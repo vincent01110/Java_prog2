@@ -13,6 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Puttony puttony = new Puttony();
 
+        /**
         for (int i = 0; i < 5; i++){
             String beolv = scanner.nextLine();
             String[] present = beolv.split(",");
@@ -33,8 +34,10 @@ public class Main {
             System.out.println(puttony.getAjandekList().get(j));
             j++;
         }
+         */
 
-        System.out.println(puttony.getAjandekList().get(0).equals(new Ajandek("Nyakkendo",0.6,2000)));
+        System.out.println(new Ajandek("Nyakkendo",0.1,2000).equals(
+                            new Ajandek("Nyakkendo",0.6,2000)));
 
 
     }
