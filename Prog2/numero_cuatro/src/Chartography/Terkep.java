@@ -21,6 +21,11 @@ public class Terkep {
         this.nevjegyzek = nevjegyzek;
     }
 
+    public Terkep(String cim, int meretarany) {
+        this.cim = cim;
+        this.meretarany = meretarany;
+    }
+
     public Terkep() {
     }
 
