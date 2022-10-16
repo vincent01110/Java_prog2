@@ -1,4 +1,4 @@
-package com.css_styling;
+package com.example.switch_scenes;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
