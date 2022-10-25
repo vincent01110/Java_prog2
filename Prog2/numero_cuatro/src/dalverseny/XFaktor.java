@@ -3,9 +3,7 @@ package dalverseny;
 import verseny.Verseny;
 import verseny.Versenyző;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class XFaktor implements Verseny{
     private int season;
@@ -13,6 +11,10 @@ public class XFaktor implements Verseny{
 
 
     public XFaktor() {
+    }
+
+    public XFaktor(int season) {
+        this.season = season;
     }
 
     public XFaktor(int season, Versenyző[] competitors) {
@@ -27,7 +29,12 @@ public class XFaktor implements Verseny{
 
     @Override
     public void nevez(Versenyző versenyző) {
-
+        HashSet<Versenyző> versenyzőHashSet = new HashSet<>();
+        for(var e : competitors){
+            versenyzőHashSet.add(e);
+        }
+        versenyzőHashSet.add(versenyző);
+        competitors = versenyzőHashSet.toArray(new Versenyző[0]);
     }
 
     @Override
@@ -53,7 +60,20 @@ public class XFaktor implements Verseny{
 
     @Override
     public int[] versenyzőkSzáma() {
-        return new int[0];
+        int egyeni = 0;
+        int csapat = 0;
+        for (var e : competitors){
+            if (e.getClass().getName().equals("Egyéni")){
+                egyeni++;
+            } else if (e.getClass().getName().equals("Csapat")){
+                csapat++;
+            }
+        }
+        int[] szam = {egyeni, csapat};
+        return szam;
     }
 
+    public Versenyző[] getCompetitors() {
+        return competitors;
+    }
 }

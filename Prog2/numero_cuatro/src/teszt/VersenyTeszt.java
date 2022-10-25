@@ -1,19 +1,16 @@
 package teszt;
 
 import dalverseny.XFaktor;
-import verseny.Csapat;
-import verseny.Egyéni;
-import verseny.Versenyző;
+import verseny.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
-public class VersenyTeszt {
-    public static void main(String[] args) throws FileNotFoundException {
+public class VersenyTeszt{
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter the path(\'src/...\') of the file=");
         String filePath = scanner.nextLine();
@@ -46,14 +43,12 @@ public class VersenyTeszt {
             evad = 2018;
         }
 
-        List<Versenyző> singersList = new ArrayList<>();
+        XFaktor xFaktor = new XFaktor(evad, new Versenyző[0]);
         for(var e : versenyzőList){
             if (e.getField().equals("ének")){
-                singersList.add(e);
+                xFaktor.nevez(e);
             }
         }
-        Versenyző[] singers = singersList.toArray(new Versenyző[0]);
-        XFaktor xFaktor = new XFaktor(evad, singers);
         System.out.println(xFaktor.toString());
 
         System.out.print("Adja meg a vissza lépni kívánó versenyző azonosítóját=");
@@ -65,7 +60,24 @@ public class VersenyTeszt {
             System.out.println(xFaktor.toString());
         }
 
+        System.out.println("Kérem adja meg a kimeneti állomány nevét=");
+        String kiFileNév = scanner.nextLine();
+        List<Verseny> versenyList = new ArrayList<>();
+        versenyList.add(xFaktor);
+        tobbCsapat(versenyList, "src/teszt/ki.txt");
 
 
+    }
+    
+    public static void tobbCsapat(Collection<Verseny> versenyek, String filePath) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+
+        System.out.println("Ezekre a versenyekre több csapat jelentkezett mint egyéni:\n");
+        for (var e : versenyek) {
+            if (((XFaktor) versenyek).versenyzőkSzáma()[0] < ((XFaktor) versenyek).versenyzőkSzáma()[1]) {
+                fileWriter.write(e.toString());
+            }
+        }
+        fileWriter.close();
     }
 }
