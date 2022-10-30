@@ -1,0 +1,12 @@
+#listView{
+    -fx-height: 80%;
+}
+
+#imageView{
+    -fx-width: 100%;
+    -fx-height: 100%;
+}
+
+#map{
+    -fx-background-image: url('file:src/main/resources/com/main/printers_map/map.jpg');
+}
