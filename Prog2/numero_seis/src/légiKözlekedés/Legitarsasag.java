@@ -53,4 +53,19 @@ public class Legitarsasag implements Flotta {
             System.out.println("Nincs ilyen file!");
         }
     }
+
+    public void kiirCsakRepulo(){
+        List<String> gyartok = new ArrayList<>();
+        for(int i = 0; i < repülőgépList.size(); i++){
+            if (repülőgépList.get(i).getClass() == Utasszallito.class){
+                gyartok.add(repülőgépList.get(i).getGyarto().toLowerCase());
+            }
+        }
+
+        for(int i = 0; i < repülőgépList.size(); i++){
+            if (!gyartok.contains(repülőgépList.get(i).getGyarto().toLowerCase())){
+                System.out.println(repülőgépList.get(i));
+            }
+        }
+    }
 }
