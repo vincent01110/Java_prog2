@@ -1,0 +1,23 @@
+package repülés;
+
+public class Utasszallito extends Repülőgép{
+    protected int ferohely;
+
+    public Utasszallito(String gyarto, String tipus, double hossz, boolean sugarhajtasu, int ferohely) {
+        super(gyarto, tipus, hossz, sugarhajtasu);
+        this.ferohely = ferohely;
+    }
+
+    public int getFerohely() {
+        return ferohely;
+    }
+
+    public void setFerohely(int ferohely) {
+        this.ferohely = ferohely;
+    }
+
+    @Override
+    public String toString() {
+        return ", " + super.toString() + " " + ferohely + " férőhelyes";
+    }
+}
