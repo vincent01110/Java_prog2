@@ -9,6 +9,9 @@ public class Printer {
     private int x;
     private int y;
 
+    public Printer() {
+    }
+
     public Printer(String name, String area, String toner) {
         this.name = name;
         this.area = area;

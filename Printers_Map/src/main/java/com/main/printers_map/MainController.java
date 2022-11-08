@@ -32,8 +32,21 @@ public class MainController implements Initializable {
     @FXML
     private Button addButton;
 
+    @FXML
+    public TextField nameField;
+    @FXML
+    public TextField areaField;
+    @FXML
+    public TextField tonerField;
+    @FXML
+    public Button confirmButton;
+
 
     private int deleteIndex = -1;
+
+    public MainController() throws FileNotFoundException {
+    }
+
     public List<Printer> readList() throws FileNotFoundException {
         List<Printer> printerList = new ArrayList<>();
         File listFile = new File("src/main/resources/com/main/printers_map/printers.txt");
@@ -52,8 +65,10 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             for(var e : readList()){
+
                 listView.getItems().add(e.getName());
             }
         } catch (FileNotFoundException e) {
@@ -77,27 +92,29 @@ public class MainController implements Initializable {
     }
 
 
-    public void addItem(String name, String area, String toner) throws IOException, URISyntaxException {
-        /**FXMLLoader loader = new FXMLLoader(getClass().getResource("popup.fxml"));
-        PopupController popupController = loader.getController();
-        Printer temp = popupController.newPrinter();
-        listView.getItems().add(temp.getName());
-        File listFile = new File("src/main/resources/com/main/printers_map/printers.txt");
-        FileWriter fileWriter = new FileWriter(listFile,true);
-        String text = "\n" + temp.getName() + ";" + temp.getArea() + ";" + temp.getToner();
-        fileWriter.write(text);
-        fileWriter.close();
-
-        Parent root = loader.load();
+    public void addItem() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("popup.fxml"));
         Scene scene = new Scene(root);
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setScene(scene);
-        popup.show();*/
+        popup.show();
     }
 
 
     public void editItem(){
         //TODO
+    }
+
+    public void setBackPrinter(Printer printer) {
+        listView.getItems().add(printer.getName());
+    }
+
+    public void newPrinter() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view.fxml"));
+        loader.getController();
+        if (confirmButton.isPressed()){
+            setBackPrinter(new Printer(nameField.getText(), areaField.getText(), tonerField.getText()));
+        }
     }
 }
